@@ -17,46 +17,38 @@ export default function Footer() {
                     className="form-control"
                   />
                   <div className="input-group-append d-flex">
-                    <button type="button" className="btn btn-primary" style={{ borderTopLeftRadius: '0px', borderBottomLeftRadius: '0px' }}>
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      style={{
+                        borderTopLeftRadius: "0px",
+                        borderBottomLeftRadius: "0px",
+                      }}
+                    >
                       Subscribe
                     </button>
                   </div>
                 </div>
               </form>
-              <p>
-                <a className="text-info" href="/register.html">
-                  Register now
-                </a>
-                to get updates on <a href="/offers.html">Offers and Coupons</a>
-              </p>
-              <div className="app">
-                <p className="mb-2">DOWNLOAD APP</p>
-                <a href="/">
-                  <img className="img-fluid" src="img/google.png" alt="" />
-                </a>
-                <a href="/">
-                  <img className="img-fluid" src="img/apple.png" alt="" />
-                </a>
-              </div>
             </div>
             <div className="col-md-1 col-sm-6 mobile-none"></div>
             <div className="col-md-2 col-6 col-sm-4">
               <h6 className="mb-3">About OE</h6>
               <ul>
                 <li>
-                  <a href="/">About Us</a>
+                  <Link to="/">About Us</Link>
                 </li>
                 <li>
-                  <a href="/">Culture</a>
+                  <Link to="/">Culture</Link>
                 </li>
                 <li>
-                  <a href="/">Blog</a>
+                  <Link to="/">Blog</Link>
                 </li>
                 <li>
-                  <a href="/">Careers</a>
+                  <Link to="/">Careers</Link>
                 </li>
                 <li>
-                  <a href="/">Contact</a>
+                  <Link to="/">Contact</Link>
                 </li>
               </ul>
             </div>
@@ -64,19 +56,19 @@ export default function Footer() {
               <h6 className="mb-3">For Foodies</h6>
               <ul>
                 <li>
-                  <a href="/">Community</a>
+                  <Link to="/">Community</Link>
                 </li>
                 <li>
-                  <a href="/">Developers</a>
+                  <Link to="/">Developers</Link>
                 </li>
                 <li>
-                  <a href="/">Blogger Help</a>
+                  <Link to="/">Blogger Help</Link>
                 </li>
                 <li>
-                  <a href="/">Verified Users</a>
+                  <Link to="/">Verified Users</Link>
                 </li>
                 <li>
-                  <a href="/">Code of Conduct</a>
+                  <Link to="/">Code of Conduct</Link>
                 </li>
               </ul>
             </div>
@@ -84,19 +76,19 @@ export default function Footer() {
               <h6 className="mb-3">For Restaurants</h6>
               <ul>
                 <li>
-                  <a href="/">Advertise</a>
+                  <Link to="/">Advertise</Link>
                 </li>
                 <li>
-                  <a href="/">Add a Restaurant</a>
+                  <Link to="/">Add a Restaurant</Link>
                 </li>
                 <li>
-                  <a href="/">Claim your Listing</a>
+                  <Link to="/">Claim your Listing</Link>
                 </li>
                 <li>
-                  <a href="/">For Businesses</a>
+                  <Link to="/">For Businesses</Link>
                 </li>
                 <li>
-                  <a href="/">Owner Guidelines</a>
+                  <Link to="/">Owner Guidelines</Link>
                 </li>
               </ul>
             </div>
@@ -106,24 +98,16 @@ export default function Footer() {
       <footer className="pt-4 pb-4 text-center">
         <div className="container">
           <p className="mt-0 mb-0">
-            © Copyright 2020 Osahan Eat. All Rights Reserved
+            © Copyright 2022 Cooked With Care. All Rights Reserved
           </p>
           <small className="mt-0 mb-0">
-            {" "}
-            Made with <i className="fas fa-heart heart-icon text-danger"></i> by
+            Made with <i className="fas fa-heart heart-icon text-danger"></i> by{" "}
             <Link
               className="text-danger"
               target="_blank"
-              to="https://www.instagram.com/iamgurdeeposahan/"
+              to="https://www.instagram.com/sbrocks46/"
             >
-              Gurdeep Osahan
-            </Link>
-            <Link
-              className="text-primary"
-              target="_blank"
-              to="https://askbootstrap.com/"
-            >
-              Ask Bootstrap
+              Sbrocks46
             </Link>
           </small>
         </div>
