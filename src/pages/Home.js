@@ -23,11 +23,13 @@ export default function Home() {
                   in India
                 </h1>
                 <h5 className="mb-5 text-secondary font-weight-normal">
-                  Lists of top restaurants, dabba valas and mess in Pune,
-                  based on ratings
+                  Lists of top restaurants, dabba valas and mess in Pune, based
+                  on ratings
                 </h5>
               </div>
-              <Link to="/explore" className="btn btn-primary">Explore Now</Link>
+              <Link to="/explore" className="btn btn-primary">
+                Explore Now
+              </Link>
               {/* <div className="homepage-search-form"> */}
               {/* <form className="form-noborder">
                   <div className="form-row">
@@ -265,8 +267,8 @@ export default function Home() {
             <div className="col-sm-12">
               <h5 className="m-0">
                 Operate food store or restaurants?{" "}
-                {user &&  <Link to="/create-store">Work With Us</Link>}
-                {!user &&  <Link to="/login">Work With Us</Link>}
+                <Link to="/create-store">Work With Us</Link>
+                {/* {!user &&  <Link to="/login">Work With Us</Link>} */}
               </h5>
             </div>
           </div>
