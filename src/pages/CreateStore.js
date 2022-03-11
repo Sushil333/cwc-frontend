@@ -1,20 +1,24 @@
 import React, { useState } from "react";
 
 export default function CreateStore() {
-  const [storeName, setStoreName] = useState("asd");
-  const [email, setEmail] = useState("asd@ad.com");
-  const [mobileNo, setContactNo] = useState("sad");
-  const [storeAddress, setStoreAddress] = useState("asd");
+  const [firstName, setFirstName] = useState("Sushil");
+  const [lastName, setLastName] = useState("Bhardwaj");
+  const [storeName, setStoreName] = useState("Sbrocks46");
+  const [email, setEmail] = useState("sushilbhardwaj705@gmail.com");
+  const [mobileNo, setContactNo] = useState("1231231231");
+  const [storeAddress, setStoreAddress] = useState("dasl;sa;ld");
   const [aadhar, setAadhar] = useState(null);
   const [pancard, setPancard] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    let url = "https://d96b-34-82-86-80.ngrok.io/api/store/create";
+    let url = "https://f8c5-35-230-13-78.ngrok.io/api/store/create";
 
     let formData = new FormData();
 
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
     formData.append("email", email);
     formData.append("storeName", storeName);
     formData.append("mobileNo", mobileNo);
@@ -59,8 +63,34 @@ export default function CreateStore() {
         id="myForm"
         encType="multipart/form-data"
       >
-        <h3 className="login-heading mb-4">Create New Store</h3>
+        <h3 className="login-heading mb-2">Create New Store</h3>
 
+        <div className="d-flex justify-content-between">
+          <div className="form-label-group mr-1" style={{ width: "100%" }}>
+            <input
+              type="text"
+              id="firstName"
+              className="form-control"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+            <label htmlFor="firstName">First Name</label>
+          </div>
+          <div className="form-label-group ml-1" style={{ width: "100%" }}>
+            <input
+              type="text"
+              id="lastName"
+              className="form-control"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+            <label htmlFor="lastName">Last Name</label>
+          </div>
+        </div>
         <div className="form-label-group">
           <input
             type="email"

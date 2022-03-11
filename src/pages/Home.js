@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 // import OwlCarousel from "react-owl-carousel";
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   // let tempData = [{}, {}, {}, {}, {}];
-  const user = useSelector((state) => state.authentication.user);
+  // const user = useSelector((state) => state.authentication.user);
 
   return (
     <>
