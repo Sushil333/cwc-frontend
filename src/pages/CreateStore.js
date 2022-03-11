@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
 export default function CreateStore() {
-  const [firstName, setFirstName] = useState("Sushil");
-  const [lastName, setLastName] = useState("Bhardwaj");
-  const [storeName, setStoreName] = useState("Sbrocks46");
-  const [email, setEmail] = useState("sushilbhardwaj705@gmail.com");
-  const [mobileNo, setContactNo] = useState("1231231231");
-  const [storeAddress, setStoreAddress] = useState("dasl;sa;ld");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [storeName, setStoreName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobileNo, setContactNo] = useState("");
+  const [storeAddress, setStoreAddress] = useState("");
   const [aadhar, setAadhar] = useState(null);
   const [pancard, setPancard] = useState(null);
 
@@ -139,6 +139,7 @@ export default function CreateStore() {
             placeholder="Conatct No"
             value={mobileNo}
             onChange={(e) => setContactNo(e.target.value)}
+            maxLength={10}
             required
           />
           <label htmlFor="mobileNo">Contact No</label>
