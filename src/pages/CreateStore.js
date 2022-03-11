@@ -13,7 +13,7 @@ export default function CreateStore() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    let url = "https://f8c5-35-230-13-78.ngrok.io/api/store/create";
+    let url = "http://cwc-api.herokuapp.com/api/store/create";
 
     let formData = new FormData();
 
