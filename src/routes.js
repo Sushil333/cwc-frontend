@@ -8,7 +8,7 @@ import MainLayout from "./layout/MainLayout";
 import Signup from "./pages/Signup";
 import CreateStore from "./pages/CreateStore";
 import Explore from "./pages/Explore";
-
+import Details from "./pages/Details";
 
 export default function Router() {
   return useRoutes([
@@ -18,6 +18,7 @@ export default function Router() {
       children: [
         { path: "/", element: <Home /> },
         { path: "/explore", element: <Explore /> },
+        { path: "/explore/:storeName/:id", element: <Details /> },
         { path: "404", element: <NotFound /> },
         { path: "*", element: <Navigate to="/404" replace /> },
       ],

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Alert from "react-bootstrap/Alert";
 
 import { userActions } from "../_actions";
 
@@ -11,15 +12,15 @@ export default function Login() {
   });
   const { email, password } = inputs;
   const [submitted, setSubmitted] = useState(false);
-
   const loggingIn = useSelector((state) => state.authentication.loggingIn);
+  const alertMessage = useSelector((state) => state.alertMessage);
+  const { variant, message } = alertMessage;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
   function handleChange(e) {
     const { name, value } = e.target;
-    console.log(name);
     setInputs((inputs) => ({ ...inputs, [name]: value }));
   }
 
@@ -29,7 +30,7 @@ export default function Login() {
     setSubmitted(true);
     if (email && password) {
       // get return url from location state or default to home page
-      dispatch(userActions.login(email, password, navigate));
+      dispatch(userActions.login({ email, password }, navigate));
     }
   }
 
@@ -42,7 +43,10 @@ export default function Login() {
             <div className="container">
               <div className="row">
                 <div className="col-md-9 col-lg-8 mx-auto pl-5 pr-5">
+                  {/* alert message */}
                   <h3 className="login-heading mb-4">Welcome back!</h3>
+                  {message && <Alert variant={variant}>{message}</Alert>}
+
                   <form onSubmit={handleSubmit}>
                     <div className="form-label-group">
                       <input

@@ -13,7 +13,7 @@ export default function CreateStore() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    let url = "http://cwc-api.herokuapp.com/api/store/create";
+    let url = "https://8f47-34-83-143-84.ngrok.io/api/store/create";
 
     let formData = new FormData();
 
@@ -35,6 +35,7 @@ export default function CreateStore() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
+        window.location.replace("/explore");
       })
       .catch((error) => {
         console.error("Error:", error);

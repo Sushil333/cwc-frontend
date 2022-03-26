@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import ListCard from "../components/ListCard";
+import StoreCard from "../components/StoreCard";
 
 export default function Explore() {
-  let tempData = [{}, {}, {}, {}, {}];
+  const [tempData, setTempData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  let url = "https://8f47-34-83-143-84.ngrok.io/api/store/get-stores";
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setTempData(data.data);
+        setLoading(false);
+      });
+  }, [url]);
+
   return (
     <>
       <section className="breadcrumb-osahan pt-5 pb-5 bg-dark position-relative text-center">
@@ -17,7 +30,7 @@ export default function Explore() {
         <div className="container">
           <div className="d-none-m row">
             <div className="col-md-12 mb-3">
-              <div className="float-right dropdown">
+              {/* <div className="float-right dropdown">
                 <button
                   aria-haspopup="true"
                   aria-expanded="false"
@@ -49,7 +62,7 @@ export default function Explore() {
                     Rating
                   </a>
                 </div>
-              </div>
+              </div> */}
               {/* <h4 className="font-weight-bold mt-0 mb-3">
                 OFFERS <small className="h6 mb-0 ml-2">299 restaurants</small>
               </h4> */}
@@ -163,7 +176,9 @@ export default function Explore() {
                         </div>
                       </div>
                     </div>
-                    <div className="filters-card border-bottom p-4">
+
+                    {/* bottom filters */}
+                    {/* <div className="filters-card border-bottom p-4">
                       <div className="filters-card-header" id="headingTwo">
                         <h6 className="mb-0">
                           <button
@@ -563,11 +578,13 @@ export default function Explore() {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
-              <div className="filters pt-2">
+
+              {/* filter 2 */}
+              {/* <div className="filters pt-2">
                 <div className="filters-body rounded shadow-sm bg-white">
                   <div className="filters-card p-4">
                     <div>
@@ -629,22 +646,30 @@ export default function Explore() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="col-md-9">
               <div className="row">
-                {tempData.map((index, ele) => (
-                  <div className="mb-4 pb-2 col-md-4 col-sm-6">
-                    <ListCard key={index} />
+                {tempData &&
+                  tempData.map((ele) => (
+                    <div className="mb-4 pb-2 col-md-4 col-sm-6" key={ele._id}>
+                      <StoreCard
+                        id={ele._id}
+                        storeName={ele.storeName}
+                        address={ele.storeAddress}
+                      />
+                    </div>
+                  ))}
+
+                {loading && (
+                  <div className="text-center load-more col-md-12">
+                    <button type="button" className="btn btn-primary">
+                      <div className="mr-1 spinner-grow spinner-grow-sm"></div>
+                      Loading...
+                    </button>
                   </div>
-                ))}
-                <div className="text-center load-more col-md-12">
-                  <button type="button" className="btn btn-primary">
-                    <div className="mr-1 spinner-grow spinner-grow-sm"></div>
-                    Loading...
-                  </button>
-                </div>
+                )}
               </div>
             </div>
           </div>

@@ -1,7 +1,44 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Alert from "react-bootstrap/Alert";
+
+import { userActions } from "../_actions";
 
 export default function Signup() {
+  const [inputs, setInputs] = useState({
+    email: "sushilbhardwaj705@gmail.com",
+    password: "123123",
+    confirmPassword: "123123",
+    firstName: "Sushil",
+    lastName: "Bhardwaj",
+  });
+  const { firstName, lastName, email, password, confirmPassword } = inputs;
+  const alertMessage = useSelector((state) => state.alertMessage);
+  const { variant, message } = alertMessage;
+  const [submitted, setSubmitted] = useState(false);
+
+  const loading = useSelector((state) => state.registration.loading);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setInputs((inputs) => ({ ...inputs, [name]: value }));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    setSubmitted(true);
+    if (email && password && password === confirmPassword) {
+      dispatch(
+        userActions.register({ email, password, firstName, lastName }, navigate)
+      );
+    }
+  }
+
   return (
     <div className="container-fluid">
       <div className="row no-gutter">
@@ -12,42 +49,121 @@ export default function Signup() {
               <div className="row">
                 <div className="col-md-9 col-lg-8 mx-auto pl-5 pr-5">
                   <h3 className="login-heading mb-4">New Buddy!</h3>
-                  <form>
+                  {message && <Alert variant={variant}>{message}</Alert>}
+                  <form onSubmit={handleSubmit} autoComplete="false">
                     <div className="form-label-group">
                       <input
                         type="email"
                         id="inputEmail"
-                        className="form-control"
+                        name="email"
+                        className={
+                          "form-control" +
+                          (submitted && !email ? " is-invalid" : "")
+                        }
                         placeholder="Email address"
+                        value={email}
+                        onChange={handleChange}
                       />
-                      <label for="inputEmail">Email address</label>
+                      {submitted && !email && (
+                        <div className="invalid-feedback">
+                          email is required
+                        </div>
+                      )}
+                      <label htmlFor="inputEmail">Email address</label>
                     </div>
+
+                    <div className="form-label-group">
+                      <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        className={
+                          "form-control" +
+                          (submitted && !firstName ? " is-invalid" : "")
+                        }
+                        placeholder="First Name"
+                        value={firstName}
+                        onChange={handleChange}
+                      />
+                      {submitted && !firstName && (
+                        <div className="invalid-feedback">
+                          First Name is required
+                        </div>
+                      )}
+                      <label htmlFor="firstName">First Name</label>
+                    </div>
+
+                    <div className="form-label-group">
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        className={
+                          "form-control" +
+                          (submitted && !lastName ? " is-invalid" : "")
+                        }
+                        placeholder="Last Name"
+                        value={lastName}
+                        onChange={handleChange}
+                      />
+                      {submitted && !lastName && (
+                        <div className="invalid-feedback">
+                          Last Name is required
+                        </div>
+                      )}
+                      <label htmlFor="inputEmail">Last Name</label>
+                    </div>
+
                     <div className="form-label-group">
                       <input
                         type="password"
                         id="inputPassword"
-                        className="form-control"
+                        name="password"
+                        className={
+                          "form-control" +
+                          (submitted && !password ? " is-invalid" : "")
+                        }
                         placeholder="Password"
+                        value={password}
+                        onChange={handleChange}
                       />
-                      <label for="inputPassword">Password</label>
+                      {submitted && !password && (
+                        <div className="invalid-feedback">
+                          Password is required
+                        </div>
+                      )}
+                      <label htmlFor="inputPassword">Password</label>
                     </div>
-                    <div className="form-label-group mb-4">
+
+                    <div className="form-label-group">
                       <input
                         type="password"
-                        id="inputPassword2"
-                        className="form-control"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        className={
+                          "form-control" +
+                          (submitted && !confirmPassword ? " is-invalid" : "")
+                        }
                         placeholder="Confirm Password"
+                        value={confirmPassword}
+                        onChange={handleChange}
                       />
-                      <label for="inputPassword2">Confirm Password</label>
+                      {submitted && !confirmPassword && (
+                        <div className="invalid-feedback">
+                          Confirm Password is required
+                        </div>
+                      )}
+                      <label htmlFor="confirmPassword">Confirm Password</label>
                     </div>
-                    <a
-                      href="index.html"
-                      className="btn btn-lg btn-outline-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
-                    >
+                    <button className="btn btn-lg btn-outline-primary btn-block btn-login text-uppercase font-weight-bold mb-2">
+                      {loading && (
+                        <span className="spinner-border spinner-border-sm mr-1"></span>
+                      )}{" "}
                       Sign Up
-                    </a>
+                    </button>
+
                     <div className="text-center pt-3">
-                      Already have an Account?{" "}
+                      Aleady have an account?
                       <Link className="font-weight-bold" to="/login">
                         Sign In
                       </Link>
