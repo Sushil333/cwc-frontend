@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
-import { userActions } from '../_actions';
+import { logout, isAuthenticated } from "../redux/actions/authAction";
 
 export const MyAccount = () => {
   return (
@@ -24,11 +24,15 @@ export const MyAccount = () => {
 
 export default function MainNavbar() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.authentication.user);
+  const user = useSelector((state) => state.authState.isAuthenticated);
 
-  const logout = () => {
-    dispatch(userActions.logout()); 
-  }
+  useEffect(() => {
+    dispatch(isAuthenticated());
+  }, [dispatch]);
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <Navbar
       collapseOnSelect
@@ -38,9 +42,7 @@ export default function MainNavbar() {
       variant="light"
     >
       <Container>
-        <Navbar.Brand href="/">
-          Cooked With Care
-        </Navbar.Brand>
+        <Navbar.Brand href="/">Cooked With Care</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
@@ -56,8 +58,15 @@ export default function MainNavbar() {
             )}
             {user && (
               <NavDropdown title={<MyAccount />} style={{ cursor: "pointer" }}>
-
-                <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+                <NavDropdown.Item href="/my-profile">
+                  My Profile
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/order-history">
+                  My Orders
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={handleLogout}>
+                  Logout
+                </NavDropdown.Item>
                 {/* <NavDropdown.Item href="#action/3.2">
                   Another action
                 </NavDropdown.Item> */}

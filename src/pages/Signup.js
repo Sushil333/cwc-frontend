@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "react-bootstrap/Alert";
 
-import { userActions } from "../_actions";
+import  * as userActions  from "../redux/actions/authAction";
 
 export default function Signup() {
   const [inputs, setInputs] = useState({
@@ -34,7 +34,7 @@ export default function Signup() {
     setSubmitted(true);
     if (email && password && password === confirmPassword) {
       dispatch(
-        userActions.register({ email, password, firstName, lastName }, navigate)
+        userActions.login({ email, password, firstName, lastName }, navigate)
       );
     }
   }

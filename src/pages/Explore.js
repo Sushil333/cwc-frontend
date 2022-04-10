@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
 
 import StoreCard from "../components/StoreCard";
+import * as api from '../api/index'
 
 export default function Explore() {
   const [tempData, setTempData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  let url = "https://8f47-34-83-143-84.ngrok.io/api/store/get-stores";
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setTempData(data.data);
+    api.getStores()
+      .then((res) => {
+        setTempData(res.data.data);
         setLoading(false);
       });
-  }, [url]);
+  }, []);
 
   return (
     <>

@@ -1,68 +1,61 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
-export default function ListCard({ dishName, price, dishImg }) {
+import * as api from "../api/index";
+
+export default function ListCard({ dishName, price, dishImg, storeId }) {
   const [show, setShow] = useState(false);
   const [address, setaddress] = useState("");
-  const [username, setusername] = useState("");
+
+  const user = useSelector((state) => state.authState.userInfo);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // Example POST method implementation:
-  async function postData(url, data) {
-    console.log(data);
-    const response = await fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data), // body data type must match "Content-Type" header
-    });
-    return response.json(); // parses JSON response into native JavaScript objects
-  }
-
   const placeOrder = () => {
-    // const formData = new FormData();
-    // formData.append("dishName", dishName);
-    // formData.append("price", price);
-    // formData.append("address", address);
-    // formData.append("username", username);
-    const data = { dishName, price, username, address };
-    postData("https://403d-104-198-97-56.ngrok.io/api/store/place-orders", data)
-      .then((data) => alert("Order is placed"))
-      .catch((err) => console.log(err));
+    const data = {
+      dishName,
+      price,
+      username: user.name,
+      address,
+      storeId,
+      userId: user.id,
+    };
 
-    handleClose();
+    if (!address) alert("Address is required!");
+    else {
+      api
+        .placeOrder(data)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+      handleClose();
+    }
   };
 
   return (
-    <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
+    <div className="list-card bg-white rounded overflow-hidden position-relative shadow-sm">
       <div className="list-card-image">
-        {/* <a href="/detail"> */}
-        <img src={dishImg} alt="Product" className="img-fluid item-img" />
-        {/* </a> */}
+        <img src={dishImg} alt="Product" className="card-img-top" />
       </div>
       <div className="p-3 position-relative">
         <div className="list-card-body">
-          <h6 className="mb-1">
-            <a className="text-black" href="/detail">
-              {dishName}
-            </a>
-          </h6>
+          <h6 className="mb-2">{dishName}</h6>
           {/* <p className="text-gray mb-3">Pure veg</p> */}
-          <p className="text-gray mb-3 time">
-            <span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2">
-              <i className="icofont-wall-clock"></i> 15–25 min
+          <p className="text-gray mb-3">
+            <span className="py-1 px-2 bg-light rounded-sm text-dark">
+              {" "}
+              ₹ {price}
             </span>
-            <span className="float-right text-black-50"> ₹{price} </span>
           </p>
         </div>
         {/* <div className="list-card-badge">
           <span className="badge badge-success">OFFER</span>{" "}
           <small>65% off | Use Coupon OSAHAN50</small>
         </div> */}
-        <button className="btn btn-primary" onClick={handleShow}>
+        <button className="btn btn-sm btn-primary" onClick={handleShow}>
           BUY NOW
         </button>
       </div>
@@ -75,26 +68,11 @@ export default function ListCard({ dishName, price, dishImg }) {
           <div className="form-label-group">
             <input
               type="text"
-              id="user-name"
-              name="user-name"
-              className="form-control"
-              placeholder="Full Name"
-              value={username}
-              required
-              onChange={(e) => setusername(e.target.value)}
-            />
-            <label htmlFor="user-name">Full Name</label>
-          </div>
-
-          <div className="form-label-group">
-            <input
-              type="text"
               id="order-address"
               name="order-address"
               className="form-control"
               placeholder="Address"
               value={address}
-              required
               onChange={(e) => setaddress(e.target.value)}
             />
             <label htmlFor="order-address">Address</label>

@@ -9,6 +9,8 @@ import Signup from "./pages/Signup";
 import CreateStore from "./pages/CreateStore";
 import Explore from "./pages/Explore";
 import Details from "./pages/Details";
+import MyProfile from "./pages/MyProfile";
+import OrderHistory from "./pages/OrderHistory";
 
 export default function Router() {
   return useRoutes([
@@ -18,8 +20,10 @@ export default function Router() {
       children: [
         { path: "/", element: <Home /> },
         { path: "/explore", element: <Explore /> },
-        { path: "/explore/:storeName/:id", element: <Details /> },
+        { path: "/explore/:id", element: <Details /> },
         { path: "404", element: <NotFound /> },
+        { path: "/my-profile", element: <MyProfile /> },
+        { path: "/order-history", element: <OrderHistory /> },
         { path: "*", element: <Navigate to="/404" replace /> },
       ],
     },

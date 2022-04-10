@@ -9,7 +9,7 @@ export default function StoreCard({ id, storeName, address }) {
             <i className="icofont-star"></i> 3.1 (300+)
           </span>
         </div>
-        <Link to={`/explore/${storeName}/${id}`}>
+        <Link to={`/explore/${id}`}>
           <img
             src="https://osahan-eat.surge.sh/img/list/1.png"
             alt="Product"
