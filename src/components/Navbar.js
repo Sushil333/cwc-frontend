@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
-import { logout, isAuthenticated } from "../redux/actions/authAction";
+import { logout } from "../redux/actions/authAction";
 
 export const MyAccount = () => {
   return (
@@ -24,11 +24,10 @@ export const MyAccount = () => {
 
 export default function MainNavbar() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.authState.isAuthenticated);
-
-  useEffect(() => {
-    dispatch(isAuthenticated());
-  }, [dispatch]);
+  const isAuthenticated = useSelector((state) => {
+    console.log(state);
+    return state.authState.isAuthenticated;
+  });
 
   const handleLogout = () => {
     dispatch(logout());
@@ -46,7 +45,7 @@ export default function MainNavbar() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
-            {!user && (
+            {!isAuthenticated && (
               <>
                 <Link to="/login" className="nav-link">
                   Login
@@ -56,7 +55,7 @@ export default function MainNavbar() {
                 </Link>
               </>
             )}
-            {user && (
+            {isAuthenticated && (
               <NavDropdown title={<MyAccount />} style={{ cursor: "pointer" }}>
                 <NavDropdown.Item href="/my-profile">
                   My Profile

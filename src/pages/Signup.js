@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "react-bootstrap/Alert";
 
-import  * as userActions  from "../redux/actions/authAction";
+import * as userActions from "../redux/actions/authAction";
 
 export default function Signup() {
   const [inputs, setInputs] = useState({
@@ -13,12 +13,14 @@ export default function Signup() {
     firstName: "Sushil",
     lastName: "Bhardwaj",
   });
-  const { firstName, lastName, email, password, confirmPassword } = inputs;
-  const alertMessage = useSelector((state) => state.alertMessage);
-  const { variant, message } = alertMessage;
-  const [submitted, setSubmitted] = useState(false);
 
-  const loading = useSelector((state) => state.registration.loading);
+  const { firstName, lastName, email, password, confirmPassword } = inputs;
+  const registerState = useSelector((state) => {
+    console.log(state);
+    return state.registerState;
+  });
+  const { loading, error } = registerState;
+  const [submitted, setSubmitted] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -49,7 +51,7 @@ export default function Signup() {
               <div className="row">
                 <div className="col-md-9 col-lg-8 mx-auto pl-5 pr-5">
                   <h3 className="login-heading mb-4">New Buddy!</h3>
-                  {message && <Alert variant={variant}>{message}</Alert>}
+                  {error && <Alert variant="danger">{error}</Alert>}
                   <form onSubmit={handleSubmit} autoComplete="false">
                     <div className="form-label-group">
                       <input
