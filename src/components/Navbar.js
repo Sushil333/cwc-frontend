@@ -8,6 +8,7 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 import { logout } from "../redux/actions/authAction";
+import Logo from "./logo.jpeg";
 
 export const MyAccount = () => {
   return (
@@ -24,10 +25,7 @@ export const MyAccount = () => {
 
 export default function MainNavbar() {
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state) => {
-    console.log(state);
-    return state.authState.isAuthenticated;
-  });
+  const isAuthenticated = useSelector((state) => state.authState.isAuthenticated);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -41,7 +39,9 @@ export default function MainNavbar() {
       variant="light"
     >
       <Container>
-        <Navbar.Brand href="/">Cooked With Care</Navbar.Brand>
+        <Navbar.Brand href="/">
+          <img src={Logo} alt="logo" width="60" height="60" /> Cooked With Care
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">

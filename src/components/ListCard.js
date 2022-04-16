@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 import * as api from "../api/index";
 
 export default function ListCard({ dishName, price, dishImg, storeId }) {
   const [show, setShow] = useState(false);
   const [address, setaddress] = useState("");
+  
+  const navigate = useNavigate();
 
   const user = useSelector((state) => state.authState.userInfo);
 
@@ -29,6 +32,7 @@ export default function ListCard({ dishName, price, dishImg, storeId }) {
         .placeOrder(data)
         .then((res) => {
           console.log(res);
+          navigate('/order-history')
         })
         .catch((err) => console.log(err));
       handleClose();
@@ -55,9 +59,16 @@ export default function ListCard({ dishName, price, dishImg, storeId }) {
           <span className="badge badge-success">OFFER</span>{" "}
           <small>65% off | Use Coupon OSAHAN50</small>
         </div> */}
-        <button className="btn btn-sm btn-primary" onClick={handleShow}>
-          BUY NOW
-        </button>
+        {user && (
+          <button className="btn btn-sm btn-primary" onClick={handleShow}>
+            BUY NOW
+          </button>
+        )}
+        {!user && (
+          <Link className="btn btn-sm btn-primary" to="/login">
+            BUY NOW
+          </Link>
+        )}
       </div>
 
       <Modal show={show} onHide={handleClose}>
