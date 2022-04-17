@@ -13,10 +13,7 @@ export default function Login() {
   const { email, password } = inputs;
   const [submitted, setSubmitted] = useState(false);
   // const loading = false;
-  const loginState = useSelector((state) => {
-    console.log(state)
-    return state.loginState
-  });
+  const loginState = useSelector((state) => state.loginState);
   const { loading, error } = loginState;
 
   const dispatch = useDispatch();

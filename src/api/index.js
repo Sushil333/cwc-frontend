@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "https://cwc-api.herokuapp.com/" });
+// const API = axios.create({ baseURL: "https://cwc-api.herokuapp.com/" });
 
-// const API = axios.create({ baseURL: "https://95a0-34-105-39-142.ngrok.io/" });
+const API = axios.create({ baseURL: "https://aa4b-35-197-32-24.ngrok.io/" });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("userInfo")) {
@@ -17,9 +17,11 @@ API.interceptors.request.use((req) => {
 /**
  * Authentication Routes
  */
-export const signUp = (formData) => API.post("/api/users/signup", formData);
+export const signUp = (formData) => API.post("/api/user/signup", formData);
 export const signIn = (formData) => API.post("/api/user/signin", formData);
-export const getUserProfile = () => API.get("/api/users/get-user-profile");
+export const getUserProfile = () => API.get("/api/user/get-user-profile");
+export const reserPassword = (formData) =>
+  API.post("/api/user/reset-password", formData);
 
 /**
  * Store Routes

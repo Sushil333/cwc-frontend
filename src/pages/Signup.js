@@ -15,10 +15,7 @@ export default function Signup() {
   });
 
   const { firstName, lastName, email, password, confirmPassword } = inputs;
-  const registerState = useSelector((state) => {
-    console.log(state);
-    return state.registerState;
-  });
+  const registerState = useSelector((state) => state.registerState);
   const { loading, error } = registerState;
   const [submitted, setSubmitted] = useState(false);
 
@@ -36,7 +33,7 @@ export default function Signup() {
     setSubmitted(true);
     if (email && password && password === confirmPassword) {
       dispatch(
-        userActions.login({ email, password, firstName, lastName }, navigate)
+        userActions.register({ email, password, firstName, lastName }, navigate)
       );
     }
   }

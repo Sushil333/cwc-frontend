@@ -32,7 +32,7 @@ export const register = (formData, navigate) => async (dispatch) => {
   try {
     dispatch({ type: actionType.REGISTER_REQUEST });
 
-    const { data } = await api.signIn(formData);
+    const { data } = await api.signUp(formData);
 
     dispatch({
       type: actionType.REGISTER_SUCCESS,
