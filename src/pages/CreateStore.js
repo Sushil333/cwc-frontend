@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as api from "../api/index";
 
 export default function CreateStore() {
   const [firstName, setFirstName] = useState("");
@@ -13,8 +14,6 @@ export default function CreateStore() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    let url = "https://8f47-34-83-143-84.ngrok.io/api/store/create";
-
     let formData = new FormData();
 
     formData.append("firstName", firstName);
@@ -25,16 +24,11 @@ export default function CreateStore() {
     formData.append("storeAddress", storeAddress);
     formData.append("aadhar", aadhar);
     formData.append("pancard", pancard);
-    // };
 
-    console.log(formData);
-    fetch(url, {
-      method: "POST", // or 'PUT'
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
+    api
+      .createStore(formData)
+      .then((res) => {
+        alert("Store is successfully created. Wait for approval");
         window.location.replace("/explore");
       })
       .catch((error) => {

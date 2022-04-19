@@ -26,6 +26,7 @@ export const reserPassword = (formData) =>
 /**
  * Store Routes
  */
+export const createStore = (formData) => API.get("/api/store/create");
 export const getStores = () => API.get("/api/store/get-stores");
 export const getStore = (id) => API.get(`/api/store/${id}`);
 export const getStoreDishes = (id) =>

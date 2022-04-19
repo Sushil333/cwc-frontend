@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import ReactToPrint from "react-to-print";
 
 import * as api from "../api/index";
+import ComponentToPrint from "../components/ComponentToPrint";
 
 export default function OrderHistory() {
   const [orderList, setOrderList] = useState(null);
+
+  let componentRef = useRef();
 
   useEffect(() => {
     api
@@ -32,6 +36,7 @@ export default function OrderHistory() {
               <th scope="col">Item Price</th>
               <th scope="col">Address</th>
               <th scope="col">Booking Date</th>
+              <th scope="col">Print Invoice</th>
             </tr>
           </thead>
           <tbody>
@@ -42,6 +47,23 @@ export default function OrderHistory() {
                 <td>{ele.price}</td>
                 <td>{ele.address}</td>
                 <td>{new Date(ele.createdAt).toDateString()}</td>
+                <td>
+                  <ReactToPrint
+                    trigger={() => (
+                      <button className="btn btn-primary btn-sm">
+                        Print Invoice
+                      </button>
+                    )}
+                    content={() => componentRef}
+                  />
+                </td>
+
+                <td style={{ display: "none" }} key={ele._id}>
+                  <ComponentToPrint
+                    ref={(el) => (componentRef = el)}
+                    data={ele}
+                  />
+                </td>
               </tr>
             ))}
           </tbody>
