@@ -8,7 +8,7 @@ import * as api from "../api/index";
 export default function ListCard({ dishName, price, dishImg, storeId }) {
   const [show, setShow] = useState(false);
   const [address, setaddress] = useState("");
-  
+
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.authState.userInfo);
@@ -17,27 +17,64 @@ export default function ListCard({ dishName, price, dishImg, storeId }) {
   const handleShow = () => setShow(true);
 
   const placeOrder = () => {
-    const data = {
-      dishName,
-      price,
-      username: user.name,
-      address,
-      storeId,
-      userId: user.id,
-    };
 
     if (!address) alert("Address is required!");
     else {
-      api
-        .placeOrder(data)
-        .then((res) => {
-          console.log(res);
-          navigate('/order-history')
-        })
-        .catch((err) => console.log(err));
+      handlePayment();
       handleClose();
     }
   };
+
+  const initPayment = (data) => {
+    const options = {
+      key: "rzp_test_sdG0l6pxgteYAv",
+      amount: data.amount,
+      currency: data.currency,
+      name: dishName,
+      description: "Test Transaction",
+      image: dishImg,
+      order_id: data.id,
+      handler: async (response) => {
+
+        // creating object for mongodb
+        const dd = {
+          dishName,
+          amount: price,
+          username: user.name,
+          address,
+          storeId,
+          userId: user.id,
+          razorpay_order_id: response.razorpay_order_id,
+          razorpay_payment_id: response.razorpay_payment_id,
+          razorpay_signature: response.razorpay_signature
+        };
+
+        try {
+          const { data } = await api.razorpayVerification(response);
+          if(data) await api.placeOrder(dd);
+          alert(data.message);
+          navigate('/order-history')
+        } catch (error) {
+          console.log(error);
+        }
+
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
+
+  const handlePayment = async () => {
+		try {
+			const { data } = await api.razorpayOrderPayment({ amount: price });
+			initPayment(data.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
   return (
     <div className="list-card bg-white rounded overflow-hidden position-relative shadow-sm">

@@ -4,7 +4,6 @@ import { Container, Table } from "react-bootstrap";
 class ComponentToPrint extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = { ...props };
   }
 

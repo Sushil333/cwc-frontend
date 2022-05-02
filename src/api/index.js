@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "https://cwc-api.herokuapp.com/" });
+// const API = axios.create({ baseURL: "https://cwc-api.herokuapp.com/" });
 
-// const API = axios.create({ baseURL: "https://aa4b-35-197-32-24.ngrok.io/" });
+const API = axios.create({ baseURL: "https://9894-35-185-211-31.ngrok.io/" });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("userInfo")) {
@@ -34,3 +34,5 @@ export const getStoreDishes = (id) =>
 export const placeOrder = (formData) =>
   API.post("/api/store/place-orders", formData);
 export const ordersHistory = () => API.get("/api/store/user-orders-history");
+export const razorpayVerification = (formData) => API.post("/api/payments/verify", formData);
+export const razorpayOrderPayment = (formData) => API.post("/api/payments/orders", formData);
