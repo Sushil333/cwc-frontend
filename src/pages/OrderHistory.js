@@ -44,7 +44,7 @@ export default function OrderHistory() {
               <tr key={ele._id}>
                 <th scope="row">{index + 1}</th>
                 <td>{ele.dishName}</td>
-                <td>{ele.price}</td>
+                <td>₹ {ele.amount}</td>
                 <td>{ele.address}</td>
                 <td>{new Date(ele.createdAt).toDateString()}</td>
                 <td>
