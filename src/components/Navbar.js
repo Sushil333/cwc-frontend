@@ -35,25 +35,39 @@ export default function MainNavbar() {
     <Navbar
       collapseOnSelect
       expand="lg"
-      bg="light"
+      bg="dark"
       className="osahan-nav shadow-sm"
-      variant="light"
+      variant="dark"
     >
       <Container>
         <Navbar.Brand href="/">
-          <img src="/logo.jpeg" alt="logo" width="60" height="60" /> Cooked With
-          Care
+          <img
+            src="/logo.jpeg"
+            alt="logo"
+            width="48"
+            height="48"
+            className="rounded-circle mr-md-3"
+          />
+          <span className="d-none d-md-inline-block">Cooked With Care</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ml-auto">
+          <Nav className="ml-auto align-items-center">
             {!isAuthenticated && (
               <>
+                <Link to="/login" className="nav-link">
+                  About Us
+                </Link>
                 <Link to="/login" className="nav-link">
                   Login
                 </Link>
                 <Link to="/signup" className="nav-link">
                   Signup
+                </Link>
+                <Link to="/create-store" className="nav-link">
+                  <span className="btn btn-sm btn-primary">
+                    Register As Brand
+                  </span>
                 </Link>
               </>
             )}

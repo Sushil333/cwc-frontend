@@ -100,16 +100,6 @@ export default function Footer() {
           <p className="mt-0 mb-0">
             © Copyright 2022 Cooked With Care. All Rights Reserved
           </p>
-          <small className="mt-0 mb-0">
-            Made with <i className="fas fa-heart heart-icon text-danger"></i> by{" "}
-            <Link
-              className="text-danger"
-              target="_blank"
-              to="https://www.instagram.com/sbrocks46/"
-            >
-              Sbrocks46
-            </Link>
-          </small>
         </div>
       </footer>
     </>

@@ -1,0 +1,33 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+.navbar-brand {
+    font-family: 'Montserrat';
+    font-weight: 900;
+    font-size: 2em;
+}
+
+.navbar-brand span {
+    transition: all .3s ease;
+}
+
+.navbar-brand span:hover {
+    transform: scaleX(105%);
+}
+.navbar-brand img {
+    transition: all .3s ease;
+}
+
+.navbar-brand img:hover {
+    transform: scale(120%) rotate(360deg) ;
+}
+
+@media only screen and (max-width: 430px) {
+    .navbar-brand {
+        font-weight: 600;
+        font-size: 1.5em;
+    }
+}
