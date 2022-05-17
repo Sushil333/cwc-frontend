@@ -43,7 +43,7 @@ class ComponentToPrint extends React.Component {
 
             <tr>
               <th>Price</th>
-              <td>{this.state.data.price}</td>
+              <td>{this.state.data.amount}</td>
             </tr>
           </tbody>
         </Table>
