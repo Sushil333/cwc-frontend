@@ -35,9 +35,9 @@ export default function MainNavbar() {
     <Navbar
       collapseOnSelect
       expand="lg"
-      bg="dark"
+      bg="light"
       className="osahan-nav shadow-sm"
-      variant="dark"
+      variant="light"
     >
       <Container>
         <Navbar.Brand href="/">
