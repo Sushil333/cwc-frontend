@@ -37,17 +37,25 @@ export default function Details() {
       <div className="container">
         <div className="row">
           {allDishes &&
-            allDishes.map((ele) => (
-              <div className="mb-4 pb-2 col-md-4 col-sm-6" key={ele._id}>
-                <ListCard
-                  id={ele._id}
-                  storeId={id}
-                  dishName={ele.dishName}
-                  price={ele.price}
-                  dishImg={ele.imgUrl}
-                />
-              </div>
-            ))}
+          allDishes.filter((ele) => ele.status === true).length === 0 ? (
+            <div className="col-12 text-center mb-5">
+              <h5>No data found</h5>
+            </div>
+          ) : (
+            allDishes
+              .filter((ele) => ele.status === true)
+              .map((ele) => (
+                <div className="mb-4 pb-2 col-md-4 col-sm-6" key={ele._id}>
+                  <ListCard
+                    id={ele._id}
+                    storeId={id}
+                    dishName={ele.dishName}
+                    price={ele.price}
+                    dishImg={ele.imgUrl}
+                  />
+                </div>
+              ))
+          )}
         </div>
       </div>
     </>
