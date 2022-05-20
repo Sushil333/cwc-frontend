@@ -7,11 +7,11 @@ import * as userActions from "../redux/actions/authAction";
 
 export default function Signup() {
   const [inputs, setInputs] = useState({
-    email: "sushilbhardwaj705@gmail.com",
-    password: "123123",
-    confirmPassword: "123123",
-    firstName: "Sushil",
-    lastName: "Bhardwaj",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    firstName: "",
+    lastName: "",
   });
 
   const { firstName, lastName, email, password, confirmPassword } = inputs;
