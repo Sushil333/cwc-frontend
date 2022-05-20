@@ -20,7 +20,7 @@ export default function StoreCard({ id, storeName, address }) {
       <div className="p-3 position-relative">
         <div className="list-card-body">
           <h6 className="mb-1">
-            <Link to={`/explore/${storeName}/${id}`} className="text-black" >
+            <Link to={`/explore/${id}`} className="text-black" >
               {storeName}
             </Link>
           </h6>
